@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newspaper Seller Case Study</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <img src="assets/mam-logo-light-roboto.png" alt="Project Logo" class="logo">
+        <h1>Newspaper Seller Case Study</h1>
+        <p>Presented by: Ahmed Mohamed A. Abbas, Rokiya Abdelsattar, Ahmed Ibrahim, Hasnaa Nageh</p>
+        <p>Presented for: Dr. Noha Ali</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#problem-definition">Problem Definition</a></li>
+            <li><a href="#assumptions-parameters">Assumptions and Parameters</a></li>
+            <li><a href="#probability-distributions">Probability Distributions</a></li>
+            <li><a href="#model-formulation">Model Formulation</a></li>
+            <li><a href="#implementation">Implementation</a></li>
+            <li><a href="#results-conclusion">Results and Conclusion</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="problem-definition">
+            <h2>Problem Definition</h2>
+            <p>The newspaper seller wants to determine how many newspapers he should buy each day in order to maximize his profits. His present method of determining the quantity of newspapers is based upon his best guess or estimate of the daily demand for the day news.</p>
+        </section>
+
+        <section id="assumptions-parameters">
+            <h2>Assumptions and Parameters</h2>
+            <ul>
+                <li><strong>Selling Price (P):</strong> $0.50 per newspaper</li>
+                <li><strong>Cost Price (C):</strong> $0.33 per newspaper</li>
+                <li><strong>Scrap Value (S):</strong> $0.05 per unsold newspaper</li>
+                <li><strong>X:</strong> Quantity of newspapers purchased</li>
+                <li><strong>d:</strong> Daily demand</li>
+                <li><strong>Z:</strong> Daily profit</li>
+            </ul>
+        </section>
+
+        <section id="probability-distributions">
+            <h2>Probability Distributions</h2>
+            <h3>Day Type Probability Distribution</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Type of Newsday</th>
+                        <th>Probability</th>
+                        <th>Cumulative</th>
+                        <th>Random Number Range</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Good</td>
+                        <td>0.35</td>
+                        <td>0.35</td>
+                        <td>0 ≤ R < 0.35</td>
+                    </tr>
+                    <tr>
+                        <td>Fair</td>
+                        <td>0.45</td>
+                        <td>0.80</td>
+                        <td>0.35 ≤ R < 0.80</td>
+                    </tr>
+                    <tr>
+                        <td>Poor</td>
+                        <td>0.20</td>
+                        <td>1.00</td>
+                        <td>0.80 ≤ R ≤ 1</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Demand Probability Distribution</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Demand</th>
+                        <th colspan="3">Probability Distribution</th>
+                        <th colspan="3">Cumulative</th>
+                        <th colspan="6">Random-Digit Assignment</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th>Good</th>
+                        <th>Fair</th>
+                        <th>Poor</th>
+                        <th>Good</th>
+                        <th>Fair</th>
+                        <th>Poor</th>
+                        <th colspan="2">Good</th>
+                        <th colspan="2">Fair</th>
+                        <th colspan="2">Poor</th>
+                    </tr>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>Lower</th>
+                        <th>Upper</th>
+                        <th>Lower</th>
+                        <th>Upper</th>
+                        <th>Lower</th>
+                        <th>Upper</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>40</td>
+                        <td>0.03</td>
+                        <td>0.10</td>
+                        <td>0.44</td>
+                        <td>0.03</td>
+                        <td>0.10</td>
+                        <td>0.44</td>
+                        <td>0.00</td>
+                        <td>0.02</td>
+                        <td>0.00</td>
+                        <td>0.09</td>
+                        <td>0.00</td>
+                        <td>0.43</td>
+                    </tr>
+                    <tr>
+                        <td>50</td>
+                        <td>0.05</td>
+                        <td>0.18</td>
+                        <td>0.22</td>
+                        <td>0.08</td>
+                        <td>0.28</td>
+                        <td>0.66</td>
+                        <td>0.03</td>
+                        <td>0.07</td>
+                        <td>0.10</td>
+                        <td>0.27</td>
+                        <td>0.44</td>
+                        <td>0.65</td>
+                    </tr>
+                    <tr>
+                        <td>60</td>
+                        <td>0.15</td>
+                        <td>0.40</td>
+                        <td>0.16</td>
+                        <td>0.23</td>
+                        <td>0.68</td>
+                        <td>0.82</td>
+                        <td>0.08</td>
+                        <td>0.22</td>
+                        <td>0.28</td>
+                        <td>0.67</td>
+                        <td>0.66</td>
+                        <td>0.81</td>
+                    </tr>
+                    <tr>
+                        <td>70</td>
+                        <td>0.20</td>
+                        <td>0.20</td>
+                        <td>0.12</td>
+                        <td>0.43</td>
+                        <td>0.88</td>
+                        <td>0.94</td>
+                        <td>0.23</td>
+                        <td>0.42</td>
+                        <td>0.68</td>
+                        <td>0.87</td>
+                        <td>0.82</td>
+                        <td>0.93</td>
+                    </tr>
+                    <tr>
+                        <td>80</td>
+                        <td>0.35</td>
+                        <td>0.08</td>
+                        <td>0.06</td>
+                        <td>0.78</td>
+                        <td>0.96</td>
+                        <td>1.00</td>
+                        <td>0.43</td>
+                        <td>0.77</td>
+                        <td>0.88</td>
+                        <td>0.95</td>
+                        <td>0.94</td>
+                        <td>1.00</td>
+                    </tr>
+                    <tr>
+                        <td>90</td>
+                        <td>0.15</td>
+                        <td>0.04</td>
+                        <td>0.00</td>
+                        <td>0.93</td>
+                        <td>1.00</td>
+                        <td></td>
+                        <td>0.78</td>
+                        <td>0.92</td>
+                        <td>0.96</td>
+                        <td>1.00</td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                    <tr>
+                        <td>100</td>
+                        <td>0.07</td>
+                        <td>0.00</td>
+                        <td>0.00</td>
+                        <td>1.00</td>
+                        <td></td>
+                        <td></td>
+                        <td>0.93</td>
+                        <td>1.00</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section id="model-formulation">
+            <h2>Model Formulation</h2>
+            <p>The key equations used in the model are as follows (corrected for clarity):</p>
+            <ol>
+                <li>Revenue from sales = min(d, X) × P</li>
+                <li>Cost of newspapers = X × C</li>
+                <li>Number of unsold newspapers = max(X - d, 0)</li>
+                <li>Salvage from scrap = Number of unsold newspapers × S</li>
+                <li>Lost profit from unmet demand = (d > X) ? (d - X) × (P - C) : 0</li>
+                <li>Daily profit (Z) = Revenue from sales - Cost of newspapers + Salvage from scrap - Lost profit from unmet demand</li>
+            </ol>
+            <p><strong>Objective:</strong> Use simulation (e.g., random number generation for day type and demand) to estimate the optimal number of newspapers to purchase daily (X) that maximizes the average profit Z(X, d).</p>
+        </section>
+
+        <section id="implementation">
+            <h2>Implementation</h2>
+            <h3>Excel Sheet Simulation Example</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>R.D Type</th>
+                        <th>Type</th>
+                        <th>R.D.Demand</th>
+                        <th>Demand</th>
+                        <th>Revenue Sales</th>
+                        <th>Excess Demand</th>
+                        <th>Lost Profit</th>
+                        <th>Num of Scrap</th>
+                        <th>Salvage from Scrap</th>
+                        <th>Daily Profit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>1</td>
+                        <td>Good</td>
+                        <td>1</td>
+                        <td>40</td>
+                        <td>2000</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>30</td>
+                        <td>150</td>
+                        <td>-160</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>2</td>
+                        <td>Good</td>
+                        <td>26</td>
+                        <td>70</td>
+                        <td>3500</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1190</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>32</td>
+                        <td>Good</td>
+                        <td>75</td>
+                        <td>80</td>
+                        <td>3500</td>
+                        <td>10</td>
+                        <td>170</td>
+                        <td>0</td>
+                        <td>0</td>
+                        <td>1020</td>
+                    </tr>
+                    <!-- Additional rows can be added from the PDF -->
+                </tbody>
+            </table>
+            <p>Note: The above table shows a sample simulation for X = 70 newspapers. Full simulation data is available in the original report.</p>
+
+            <h3>Project Resources</h3>
+            <ul>
+                <li><a href="Docs/Newspaper%20Seller%20Problem%20-%20Modeling%20Simulation.xlsx" target="_blank">Excel Simulation Sheet</a></li>
+                <li><a href="Console%20App/main.cpp" target="_blank">C++ Implementation</a></li>
+                <li><a href="Desktop-App" target="_blank">Tkinter GUI (Python)</a></li>
+            </ul>
+
+            <h3>C++ Code</h3>
+            <pre><code class="language-cpp">
+#include <bits/stdc++.h>
+using namespace std;
+
+constexpr int days = 30;
+constexpr int quantity = 70;
+constexpr int paper_cost = 33;
+constexpr int iteration = 10;
+constexpr float scrap_sale = 5;
+constexpr float paper_sell = 50;
+
+// Types of News day
+constexpr float GOOD = 0.35;
+constexpr float FAIR = 0.45;
+constexpr float POOR = 0.20;
+
+float cumulative_prob[3] = {GOOD, GOOD + FAIR, GOOD + FAIR + POOR};
+
+struct RD {
+    float lower, upper;
+} RandDist[3] = {
+    {0.0, GOOD - 0.01},
+    {GOOD, GOOD + FAIR - 0.01},
+    {GOOD + FAIR, GOOD + FAIR + POOR}
+};
+
+struct DayData {
+    int day;
+    double R1;
+    string type;
+    double R2;
+    int demand;
+    int revenue_sales;
+    int excess_demand;
+    int lost_profit;
+    int num_scrap;
+    int salvage_scrap;
+    int daily_profit;
+};
+
+int getDemand(const string& dayType, const double R) {
+    if (dayType == "Good") {
+        if (R < 0.03) return 40;
+        if (R < 0.08) return 50;
+        if (R < 0.23) return 60;
+        if (R < 0.43) return 70;
+        if (R < 0.78) return 80;
+        if (R < 0.93) return 90;
+        return 100;
+    }
+    if (dayType == "Fair") {
+        if (R < 0.10) return 40;
+        if (R < 0.28) return 50;
+        if (R < 0.68) return 60;
+        if (R < 0.88) return 70;
+        if (R < 0.96) return 80;
+        return 90;
+    }
+    if (dayType == "Poor") {
+        if (R < 0.44) return 40;
+        if (R < 0.66) return 50;
+        if (R < 0.82) return 60;
+        if (R < 0.94) return 70;
+        return 80;
+    }
+    return 40; // Default fallback
+}
+
+vector<DayData> simulate(int X, int N) {
+    vector<DayData> results;
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> dis(0.0, 1.0);
+    for (int day = 1; day <= N; ++day) {
+        DayData data;
+        data.day = day;
+        data.R1 = dis(gen);
+        if (data.R1 < GOOD) data.type = "Good";
+        else if (data.R1 < GOOD + FAIR) data.type = "Fair";
+        else data.type = "Poor";
+        data.R2 = dis(gen);
+        data.demand = getDemand(data.type, data.R2);
+        data.revenue_sales = min(data.demand, X) * paper_sell;
+        data.excess_demand = max(data.demand - X, 0);
+        data.lost_profit = (data.demand > X) ? (data.demand - X) * (paper_sell - paper_cost) : 0;
+        data.num_scrap = max(X - data.demand, 0);
+        data.salvage_scrap = data.num_scrap * scrap_sale;
+        data.daily_profit = data.revenue_sales - (X * paper_cost) + data.salvage_scrap - data.lost_profit;
+        results.push_back(data);
+    }
+    return results;
+}
+
+void writeTable(const vector<DayData>& results) {
+    ofstream outfile("simulation_results.txt");
+    outfile << "Day\t|\tR1\t|\tType\t|\tR2\t|\tDemand\t|\tRevenue Sales\t|\tExcess Demand\t|\tLost Profit\t|\tNum Scrap\t|\tSalvage Scrap\t|\tDaily Profit\n";
+    for (const auto& data : results) {
+        outfile << data.day << "\t|\t"
+                << fixed << setprecision(2) << data.R1 << "\t|\t"
+                << data.type << "\t|\t"
+                << data.R2 << "\t|\t"
+                << data.demand << "\t|\t"
+                << data.revenue_sales << "\t|\t"
+                << data.excess_demand << "\t|\t"
+                << data.lost_profit << "\t|\t"
+                << data.num_scrap << "\t|\t"
+                << data.salvage_scrap << "\t|\t"
+                << data.daily_profit << "\n";
+    }
+    outfile.close();
+}
+
+int main() {
+    int N_large = 1000;
+    vector<int> X_values = {40, 50, 60, 70, 80, 90, 100};
+    double best_avg_profit = -numeric_limits<double>::max();
+    int best_x = -1;
+    cout << "Let's simulate...\n";
+    for (int X : X_values) {
+        auto results = simulate(X, N_large);
+        double total_profit = 0;
+        for (const auto& data : results) total_profit += data.daily_profit;
+        double avg_profit = total_profit / N_large;
+        cout << "Quantity X = " << X << ", Average Profit = " << fixed << setprecision(2)
+             << avg_profit << " cents\n";
+        if (avg_profit > best_avg_profit) {
+            best_avg_profit = avg_profit;
+            best_x = X;
+        }
+    }
+    cout << "\nOptimal quantity to buy: " << best_x << " newspapers\n";
+    cout << "Expected avg profit: " << fixed << setprecision(2) << best_avg_profit << " cents per day\n";
+    auto table_results = simulate(best_x, days);
+    writeTable(table_results);
+    return 0;
+}
+            </code></pre>
+        </section>
+
+        <section id="results-conclusion">
+            <h2>Results and Conclusion</h2>
+            <p>The simulation results indicate that the optimal number of newspapers to purchase daily is determined by running the C++ simulation over various quantities (X = 40, 50, 60, 70, 80, 90, 100). The code calculates the average profit for each quantity over 1000 days and identifies the quantity that maximizes profit. Detailed results, including a table of Quantity vs. Average Profit and interpretations of how demand patterns and day types influence profitability, are available in the full simulation output.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Newspaper Seller Case Study. All rights reserved.</p>
+        <p><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study" target="_blank">View on GitHub</a></p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-cpp.min.js"></script>
+</body>
+</html>
