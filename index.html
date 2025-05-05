@@ -4,315 +4,327 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Newspaper Seller Case Study</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Roboto+Slab&display=swap" rel="stylesheet">
+    <!-- Prism CSS for code highlighting -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="styles.css">
 </head>
-<body>
-    <header>
-        <img src="assets/mam-logo-light-roboto.png" alt="Project Logo" class="logo">
-        <h1>Newspaper Seller Case Study</h1>
-        <p>Presented by: Ahmed Mohamed A. Abbas, Rokiya Abdelsattar, Ahmed Ibrahim, Hasnaa Nageh</p>
-        <p>Presented for: Dr. Noha Ali</p>
+<body class="bg-gray-100 font-['Roboto'] text-gray-800">
+    <header class="bg-primary text-white text-center py-6">
+        <img src="assets/mam-logo-light-roboto.png" alt="Project Logo" class="logo mx-auto d-block mb-3" style="max-width: 150px;">
+        <h1 class="font-['Roboto_Slab'] text-4xl mb-2">Newspaper Seller Case Study</h1>
+        <p class="text-lg">Presented by: Ahmed Mohamed A. Abbas, Rokiya Abdelsattar, Ahmed Ibrahim, Hasnaa Nageh</p>
+        <p class="text-lg">Presented for: Dr. Noha Ali</p>
     </header>
 
-    <nav>
-        <ul>
-            <li><a href="#problem-definition">Problem Definition</a></li>
-            <li><a href="#assumptions-parameters">Assumptions and Parameters</a></li>
-            <li><a href="#probability-distributions">Probability Distributions</a></li>
-            <li><a href="#model-formulation">Model Formulation</a></li>
-            <li><a href="#implementation">Implementation</a></li>
-            <li><a href="#results-conclusion">Results and Conclusion</a></li>
+    <nav class="bg-dark py-3 sticky-top">
+        <ul class="nav justify-content-center flex-column flex-md-row">
+            <li class="nav-item"><a href="#problem-definition" class="nav-link text-white hover:text-blue-400 transition-colors">Problem Definition</a></li>
+            <li class="nav-item"><a href="#assumptions-parameters" class="nav-link text-white hover:text-blue-400 transition-colors">Assumptions and Parameters</a></li>
+            <li class="nav-item"><a href="#probability-distributions" class="nav-link text-white hover:text-blue-400 transition-colors">Probability Distributions</a></li>
+            <li class="nav-item"><a href="#model-formulation" class="nav-link text-white hover:text-blue-400 transition-colors">Model Formulation</a></li>
+            <li class="nav-item"><a href="#implementation" class="nav-link text-white hover:text-blue-400 transition-colors">Implementation</a></li>
+            <li class="nav-item"><a href="#results-conclusion" class="nav-link text-white hover:text-blue-400 transition-colors">Results and Conclusion</a></li>
         </ul>
     </nav>
 
-    <main>
-        <section id="problem-definition">
-            <h2>Problem Definition</h2>
-            <p>The newspaper seller wants to determine how many newspapers he should buy each day in order to maximize his profits. His present method of determining the quantity of newspapers is based upon his best guess or estimate of the daily demand for the day news.</p>
+    <main class="container py-5">
+        <section id="problem-definition" class="mb-5">
+            <h2 class="font-['Roboto_Slab'] text-3xl border-b-2 border-primary pb-2 mb-4">Problem Definition</h2>
+            <p class="lead">The newspaper seller wants to determine how many newspapers he should buy each day in order to maximize his profits. His present method of determining the quantity of newspapers is based upon his best guess or estimate of the daily demand for the day news.</p>
         </section>
 
-        <section id="assumptions-parameters">
-            <h2>Assumptions and Parameters</h2>
-            <ul>
-                <li><strong>Selling Price (P):</strong> $0.50 per newspaper</li>
-                <li><strong>Cost Price (C):</strong> $0.33 per newspaper</li>
-                <li><strong>Scrap Value (S):</strong> $0.05 per unsold newspaper</li>
-                <li><strong>X:</strong> Quantity of newspapers purchased</li>
-                <li><strong>d:</strong> Daily demand</li>
-                <li><strong>Z:</strong> Daily profit</li>
+        <section id="assumptions-parameters" class="mb-5">
+            <h2 class="font-['Roboto_Slab'] text-3xl border-b-2 border-primary pb-2 mb-4">Assumptions and Parameters</h2>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><strong>Selling Price (P):</strong> $0.50 per newspaper</li>
+                <li class="list-group-item"><strong>Cost Price (C):</strong> $0.33 per newspaper</li>
+                <li class="list-group-item"><strong>Scrap Value (S):</strong> $0.05 per unsold newspaper</li>
+                <li class="list-group-item"><strong>X:</strong> Quantity of newspapers purchased</li>
+                <li class="list-group-item"><strong>d:</strong> Daily demand</li>
+                <li class="list-group-item"><strong>Z:</strong> Daily profit</li>
             </ul>
         </section>
 
-        <section id="probability-distributions">
-            <h2>Probability Distributions</h2>
-            <h3>Day Type Probability Distribution</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Type of Newsday</th>
-                        <th>Probability</th>
-                        <th>Cumulative</th>
-                        <th>Random Number Range</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Good</td>
-                        <td>0.35</td>
-                        <td>0.35</td>
-                        <td>0 ≤ R < 0.35</td>
-                    </tr>
-                    <tr>
-                        <td>Fair</td>
-                        <td>0.45</td>
-                        <td>0.80</td>
-                        <td>0.35 ≤ R < 0.80</td>
-                    </tr>
-                    <tr>
-                        <td>Poor</td>
-                        <td>0.20</td>
-                        <td>1.00</td>
-                        <td>0.80 ≤ R ≤ 1</td>
-                    </tr>
-                </tbody>
-            </table>
+        <section id="probability-distributions" class="mb-5">
+            <h2 class="font-['Roboto_Slab'] text-3xl border-b-2 border-primary pb-2 mb-4">Probability Distributions</h2>
+            <h3 class="font-['Roboto_Slab'] text-2xl mb-3">Day Type Probability Distribution</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Type of Newsday</th>
+                            <th>Probability</th>
+                            <th>Cumulative</th>
+                            <th>Random Number Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Good</td>
+                            <td>0.35</td>
+                            <td>0.35</td>
+                            <td>0 ≤ R < 0.35</td>
+                        </tr>
+                        <tr>
+                            <td>Fair</td>
+                            <td>0.45</td>
+                            <td>0.80</td>
+                            <td>0.35 ≤ R < 0.80</td>
+                        </tr>
+                        <tr>
+                            <td>Poor</td>
+                            <td>0.20</td>
+                            <td>1.00</td>
+                            <td>0.80 ≤ R ≤ 1</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
-            <h3>Demand Probability Distribution</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Demand</th>
-                        <th colspan="3">Probability Distribution</th>
-                        <th colspan="3">Cumulative</th>
-                        <th colspan="6">Random-Digit Assignment</th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th>Good</th>
-                        <th>Fair</th>
-                        <th>Poor</th>
-                        <th>Good</th>
-                        <th>Fair</th>
-                        <th>Poor</th>
-                        <th colspan="2">Good</th>
-                        <th colspan="2">Fair</th>
-                        <th colspan="2">Poor</th>
-                    </tr>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                        <th>Lower</th>
-                        <th>Upper</th>
-                        <th>Lower</th>
-                        <th>Upper</th>
-                        <th>Lower</th>
-                        <th>Upper</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>40</td>
-                        <td>0.03</td>
-                        <td>0.10</td>
-                        <td>0.44</td>
-                        <td>0.03</td>
-                        <td>0.10</td>
-                        <td>0.44</td>
-                        <td>0.00</td>
-                        <td>0.02</td>
-                        <td>0.00</td>
-                        <td>0.09</td>
-                        <td>0.00</td>
-                        <td>0.43</td>
-                    </tr>
-                    <tr>
-                        <td>50</td>
-                        <td>0.05</td>
-                        <td>0.18</td>
-                        <td>0.22</td>
-                        <td>0.08</td>
-                        <td>0.28</td>
-                        <td>0.66</td>
-                        <td>0.03</td>
-                        <td>0.07</td>
-                        <td>0.10</td>
-                        <td>0.27</td>
-                        <td>0.44</td>
-                        <td>0.65</td>
-                    </tr>
-                    <tr>
-                        <td>60</td>
-                        <td>0.15</td>
-                        <td>0.40</td>
-                        <td>0.16</td>
-                        <td>0.23</td>
-                        <td>0.68</td>
-                        <td>0.82</td>
-                        <td>0.08</td>
-                        <td>0.22</td>
-                        <td>0.28</td>
-                        <td>0.67</td>
-                        <td>0.66</td>
-                        <td>0.81</td>
-                    </tr>
-                    <tr>
-                        <td>70</td>
-                        <td>0.20</td>
-                        <td>0.20</td>
-                        <td>0.12</td>
-                        <td>0.43</td>
-                        <td>0.88</td>
-                        <td>0.94</td>
-                        <td>0.23</td>
-                        <td>0.42</td>
-                        <td>0.68</td>
-                        <td>0.87</td>
-                        <td>0.82</td>
-                        <td>0.93</td>
-                    </tr>
-                    <tr>
-                        <td>80</td>
-                        <td>0.35</td>
-                        <td>0.08</td>
-                        <td>0.06</td>
-                        <td>0.78</td>
-                        <td>0.96</td>
-                        <td>1.00</td>
-                        <td>0.43</td>
-                        <td>0.77</td>
-                        <td>0.88</td>
-                        <td>0.95</td>
-                        <td>0.94</td>
-                        <td>1.00</td>
-                    </tr>
-                    <tr>
-                        <td>90</td>
-                        <td>0.15</td>
-                        <td>0.04</td>
-                        <td>0.00</td>
-                        <td>0.93</td>
-                        <td>1.00</td>
-                        <td></td>
-                        <td>0.78</td>
-                        <td>0.92</td>
-                        <td>0.96</td>
-                        <td>1.00</td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>100</td>
-                        <td>0.07</td>
-                        <td>0.00</td>
-                        <td>0.00</td>
-                        <td>1.00</td>
-                        <td></td>
-                        <td></td>
-                        <td>0.93</td>
-                        <td>1.00</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                </tbody>
-            </table>
+            <h3 class="font-['Roboto_Slab'] text-2xl mb-3 mt-4">Demand Probability Distribution</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Demand</th>
+                            <th colspan="3">Probability Distribution</th>
+                            <th colspan="3">Cumulative</th>
+                            <th colspan="6">Random-Digit Assignment</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th>Good</th>
+                            <th>Fair</th>
+                            <th>Poor</th>
+                            <th>Good</th>
+                            <th>Fair</th>
+                            <th>Poor</th>
+                            <th colspan="2">Good</th>
+                            <th colspan="2">Fair</th>
+                            <th colspan="2">Poor</th>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th></th>
+                            <th>Lower</th>
+                            <th>Upper</th>
+                            <th>Lower</th>
+                            <th>Upper</th>
+                            <th>Lower</th>
+                            <th>Upper</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>40</td>
+                            <td>0.03</td>
+                            <td>0.10</td>
+                            <td>0.44</td>
+                            <td>0.03</td>
+                            <td>0.10</td>
+                            <td>0.44</td>
+                            <td>0.00</td>
+                            <td>0.02</td>
+                            <td>0.00</td>
+                            <td>0.09</td>
+                            <td>0.00</td>
+                            <td>0.43</td>
+                        </tr>
+                        <tr>
+                            <td>50</td>
+                            <td>0.05</td>
+                            <td>0.18</td>
+                            <td>0.22</td>
+                            <td>0.08</td>
+                            <td>0.28</td>
+                            <td>0.66</td>
+                            <td>0.03</td>
+                            <td>0.07</td>
+                            <td>0.10</td>
+                            <td>0.27</td>
+                            <td>0.44</td>
+                            <td>0.65</td>
+                        </tr>
+                        <tr>
+                            <td>60</td>
+                            <td>0.15</td>
+                            <td>0.40</td>
+                            <td>0.16</td>
+                            <td>0.23</td>
+                            <td>0.68</td>
+                            <td>0.82</td>
+                            <td>0.08</td>
+                            <td>0.22</td>
+                            <td>0.28</td>
+                            <td>0.67</td>
+                            <td>0.66</td>
+                            <td>0.81</td>
+                        </tr>
+                        <tr>
+                            <td>70</td>
+                            <td>0.20</td>
+                            <td>0.20</td>
+                            <td>0.12</td>
+                            <td>0.43</td>
+                            <td>0.88</td>
+                            <td>0.94</td>
+                            <td>0.23</td>
+                            <td>0.42</td>
+                            <td>0.68</td>
+                            <td>0.87</td>
+                            <td>0.82</td>
+                            <td>0.93</td>
+                        </tr>
+                        <tr>
+                            <td>80</td>
+                            <td>0.35</td>
+                            <td>0.08</td>
+                            <td>0.06</td>
+                            <td>0.78</td>
+                            <td>0.96</td>
+                            <td>1.00</td>
+                            <td>0.43</td>
+                            <td>0.77</td>
+                            <td>0.88</td>
+                            <td>0.95</td>
+                            <td>0.94</td>
+                            <td>1.00</td>
+                        </tr>
+                        <tr>
+                            <td>90</td>
+                            <td>0.15</td>
+                            <td>0.04</td>
+                            <td>0.00</td>
+                            <td>0.93</td>
+                            <td>1.00</td>
+                            <td></td>
+                            <td>0.78</td>
+                            <td>0.92</td>
+                            <td>0.96</td>
+                            <td>1.00</td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>100</td>
+                            <td>0.07</td>
+                            <td>0.00</td>
+                            <td>0.00</td>
+                            <td>1.00</td>
+                            <td></td>
+                            <td></td>
+                            <td>0.93</td>
+                            <td>1.00</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </section>
 
-        <section id="model-formulation">
-            <h2>Model Formulation</h2>
+        <section id="model-formulation" class="mb-5">
+            <h2 class="font-['Roboto_Slab'] text-3xl border-b-2 border-primary pb-2 mb-4">Model Formulation</h2>
             <p>The key equations used in the model are as follows (corrected for clarity):</p>
-            <ol>
-                <li>Revenue from sales = min(d, X) × P</li>
-                <li>Cost of newspapers = X × C</li>
-                <li>Number of unsold newspapers = max(X - d, 0)</li>
-                <li>Salvage from scrap = Number of unsold newspapers × S</li>
-                <li>Lost profit from unmet demand = (d > X) ? (d - X) × (P - C) : 0</li>
-                <li>Daily profit (Z) = Revenue from sales - Cost of newspapers + Salvage from scrap - Lost profit from unmet demand</li>
+            <ol class="list-group list-group-numbered">
+                <li class="list-group-item">Revenue from sales = min(d, X) × P</li>
+                <li class="list-group-item">Cost of newspapers = X × C</li>
+                <li class="list-group-item">Number of unsold newspapers = max(X - d, 0)</li>
+                <li class="list-group-item">Salvage from scrap = Number of unsold newspapers × S</li>
+                <li class="list-group-item">Lost profit from unmet demand = (d > X) ? (d - X) × (P - C) : 0</li>
+                <li class="list-group-item">Daily profit (Z) = Revenue from sales - Cost of newspapers + Salvage from scrap - Lost profit from unmet demand</li>
             </ol>
-            <p><strong>Objective:</strong> Use simulation (e.g., random number generation for day type and demand) to estimate the optimal number of newspapers to purchase daily (X) that maximizes the average profit Z(X, d).</p>
+            <p class="mt-3"><strong>Objective:</strong> Use simulation (e.g., random number generation for day type and demand) to estimate the optimal number of newspapers to purchase daily (X) that maximizes the average profit Z(X, d).</p>
         </section>
 
-        <section id="implementation">
-            <h2>Implementation</h2>
-            <h3>Excel Sheet Simulation Example</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Day</th>
-                        <th>R.D Type</th>
-                        <th>Type</th>
-                        <th>R.D.Demand</th>
-                        <th>Demand</th>
-                        <th>Revenue Sales</th>
-                        <th>Excess Demand</th>
-                        <th>Lost Profit</th>
-                        <th>Num of Scrap</th>
-                        <th>Salvage from Scrap</th>
-                        <th>Daily Profit</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>1</td>
-                        <td>Good</td>
-                        <td>1</td>
-                        <td>40</td>
-                        <td>2000</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>30</td>
-                        <td>150</td>
-                        <td>-160</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>2</td>
-                        <td>Good</td>
-                        <td>26</td>
-                        <td>70</td>
-                        <td>3500</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1190</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>32</td>
-                        <td>Good</td>
-                        <td>75</td>
-                        <td>80</td>
-                        <td>3500</td>
-                        <td>10</td>
-                        <td>170</td>
-                        <td>0</td>
-                        <td>0</td>
-                        <td>1020</td>
-                    </tr>
-                    <!-- Additional rows can be added from the PDF -->
-                </tbody>
-            </table>
-            <p>Note: The above table shows a sample simulation for X = 70 newspapers. Full simulation data is available in the original report.</p>
+        <section id="implementation" class="mb-5">
+            <h2 class="font-['Roboto_Slab'] text-3xl border-b-2 border-primary pb-2 mb-4">Implementation</h2>
+            <h3 class="font-['Roboto_Slab'] text-2xl mb-3">Excel Sheet Simulation Example</h3>
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>Day</th>
+                            <th>R.D Type</th>
+                            <th>Type</th>
+                            <th>R.D.Demand</th>
+                            <th>Demand</th>
+                            <th>Revenue Sales</th>
+                            <th>Excess Demand</th>
+                            <th>Lost Profit</th>
+                            <th>Num of Scrap</th>
+                            <th>Salvage from Scrap</th>
+                            <th>Daily Profit</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>1</td>
+                            <td>Good</td>
+                            <td>1</td>
+                            <td>40</td>
+                            <td>2000</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>30</td>
+                            <td>150</td>
+                            <td>-160</td>
+                        </tr>
+                        <tr>
+                            <td>2</td>
+                            <td>2</td>
+                            <td>Good</td>
+                            <td>26</td>
+                            <td>70</td>
+                            <td>3500</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1190</td>
+                        </tr>
+                        <tr>
+                            <td>3</td>
+                            <td>32</td>
+                            <td>Good</td>
+                            <td>75</td>
+                            <td>80</td>
+                            <td>3500</td>
+                            <td>10</td>
+                            <td>170</td>
+                            <td>0</td>
+                            <td>0</td>
+                            <td>1020</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="mt-3">Note: The above table shows a sample simulation for X = 70 newspapers. Full simulation data is available in the original report.</p>
 
-            <h3>Project Resources</h3>
-            <ul>
-                <li><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study/blob/main/Docs/Newspaper%20Seller%20Problem%20-%20Modeling%20Simulation.xlsx" target="_blank">Excel Simulation Sheet</a></li>
-                <li><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study/blob/main/Console%20App/main.cpp" target="_blank">C++ Implementation</a></li>
-                <li><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study/tree/main/Desktop-App" target="_blank">Tkinter GUI (Python)</a></li>
+            <h3 class="font-['Roboto_Slab'] text-2xl mb-3 mt-4">Project Resources</h3>
+            <ul class="list-group">
+                <li class="list-group-item"><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study/blob/main/Docs/Newspaper%20Seller%20Problem%20-%20Modeling%20Simulation.xlsx" target="_blank" class="btn btn-primary">Excel Simulation Sheet</a></li>
+                <li class="list-group-item"><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study/blob/main/Console%20App/main.cpp" target="_blank" class="btn btn-primary">C++ Implementation</a></li>
+                <li class="list-group-item"><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study/tree/main/Desktop-App" target="_blank" class="btn btn-primary">Tkinter GUI (Python)</a></li>
             </ul>
 
-            <h3>C++ Code</h3>
-            <pre><code class="language-cpp">
+            <h3 class="font-['Roboto_Slab'] text-2xl mb-3 mt-4">C++ Code</h3>
+            <pre class="bg-light p-3 border rounded overflow-x-auto"><code class="language-cpp">
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -451,17 +463,20 @@ int main() {
             </code></pre>
         </section>
 
-        <section id="results-conclusion">
-            <h2>Results and Conclusion</h2>
-            <p>The simulation results indicate that the optimal number of newspapers to purchase daily is determined by running the C++ simulation over various quantities (X = 40, 50, 60, 70, 80, 90, 100). The code calculates the average profit for each quantity over 1000 days and identifies the quantity that maximizes profit. Detailed results, including a table of Quantity vs. Average Profit and interpretations of how demand patterns and day types influence profitability, are available in the full simulation output.</p>
+        <section id="results-conclusion" class="mb-5">
+            <h2 class="font-['Roboto_Slab'] text-3xl border-b-2 border-primary pb-2 mb-4">Results and Conclusion</h2>
+            <p class="lead">The simulation results indicate that the optimal number of newspapers to purchase daily is determined by running the C++ simulation over various quantities (X = 40, 50, 60, 70, 80, 90, 100). The code calculates the average profit for each quantity over 1000 days and identifies the quantity that maximizes profit. Detailed results, including a table of Quantity vs. Average Profit and interpretations of how demand patterns and day types influence profitability, are available in the full simulation output.</p>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2025 Newspaper Seller Case Study. All rights reserved.</p>
-        <p><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study" target="_blank">View on GitHub</a></p>
+    <footer class="bg-dark text-white text-center py-4 mt-5">
+        <p>© 2025 Newspaper Seller Case Study. All rights reserved.</p>
+        <p><a href="https://github.com/3bbaas/Newspaper-Selle-rSimulation-Case-Study" target="_blank" class="text-white hover:text-blue-400">View on GitHub</a></p>
     </footer>
 
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <!-- Prism JS for code highlighting -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-cpp.min.js"></script>
 </body>
